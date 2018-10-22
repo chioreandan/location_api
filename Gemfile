@@ -5,12 +5,16 @@ ruby '2.4.4'
 
 gem 'rails', '~> 5.1', '>= 5.1.4'
 gem 'devise'
-gem 'sqlite3'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'pg', '~> 0.21'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :test do
+  gem 'sqlite3'
 end
 
 group :development do
