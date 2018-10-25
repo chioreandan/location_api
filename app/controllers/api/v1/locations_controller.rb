@@ -1,25 +1,33 @@
 class Api::V1::LocationsController < Api::V1::BaseController
-  before_action :set_location, only: [:show, :delete]
+  before_action :set_location, only: [:show, :destroy]
 
   def index
     @locations = Location.all
     render json: @locations
   end
 
-  def create
-    location = Location.new(location_params)
-    location.save!
+  # def new
+  #   @location = Location.new
 
-    render json: location
+  #   render json: @location
+  # end
+
+  def create
+    @location = Location.new(location_params)
+    if @location.save!
+      render json: @location
+    else
+      render json: @location.errors
+    end
   end
 
   def show
     render json: @location
   end
 
-  def delete
+  def destroy
     @location.destroy
-    render josn: @location
+    render :json => "Location deleted"
   end
 
   private
@@ -29,6 +37,6 @@ class Api::V1::LocationsController < Api::V1::BaseController
     end
 
     def location_params
-      params.require(:location).permit(:latitude, :longitude)
+      params.require(:location).permit(:latitude, :longitude, :user_id)
     end
 end
