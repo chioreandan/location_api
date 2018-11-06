@@ -1,16 +1,12 @@
+# frozen_string_literal: true
+
 class Api::V1::LocationsController < Api::V1::BaseController
-  before_action :set_location, only: [:show, :destroy]
+  before_action :set_location, only: %i[show destroy]
 
   def index
     @locations = Location.all
     render json: @locations
   end
-
-  # def new
-  #   @location = Location.new
-
-  #   render json: @location
-  # end
 
   def create
     @location = Location.new(location_params)
@@ -27,16 +23,16 @@ class Api::V1::LocationsController < Api::V1::BaseController
 
   def destroy
     @location.destroy
-    render :json => "Location deleted"
+    render json: 'Location deleted'
   end
 
   private
 
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(:latitude, :longitude, :user_id)
-    end
+  def location_params
+    params.require(:location).permit(:latitude, :longitude, :user_id)
+  end
 end
