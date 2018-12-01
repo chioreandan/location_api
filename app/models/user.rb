@@ -2,11 +2,10 @@
 
 class User < ApplicationRecord
   # include Devise::JWT::RevocationStrategies::JTIMatcher
+  acts_as_token_authenticatable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: JWTBlacklist
-
+         :recoverable, :rememberable, :validatable
 
   has_many :locations
 end

@@ -10,6 +10,7 @@ class Api::V1::LocationsController < Api::V1::BaseController
 
   def create
     @location = Location.new(location_params)
+    @location.user_id = current_user.id
     if @location.save!
       render json: @location
     else
@@ -33,6 +34,6 @@ class Api::V1::LocationsController < Api::V1::BaseController
   end
 
   def location_params
-    params.require(:location).permit(:latitude, :longitude, :user_id)
+    params.require(:location).permit(:latitude, :longitude)
   end
 end
