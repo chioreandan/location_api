@@ -4,7 +4,7 @@ class Api::V1::LocationsController < Api::V1::BaseController
   before_action :set_location, only: %i[show destroy]
 
   def index
-    @locations = Location.all
+    @locations = current_user.locations.all
     render json: @locations
   end
 
