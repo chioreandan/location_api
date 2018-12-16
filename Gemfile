@@ -14,6 +14,7 @@ gem 'jwt'
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.1', '>= 5.1.4'
+gem 'rack-cors', '~>  0.4.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
