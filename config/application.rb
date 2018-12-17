@@ -21,6 +21,8 @@ module LocationApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.time_zone = 'Europe/Bucharest'
+    config.active_record.default_timezone = :local # Or :utc
     config.middleware.use Rack::Cors do
       allow do
         origins '*'

@@ -8,6 +8,7 @@ ruby '2.4.4'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.8'
+gem 'by_star', git: "git://github.com/radar/by_star"
 gem 'devise_token_auth'
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
 gem 'jwt'
