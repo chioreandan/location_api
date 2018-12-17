@@ -5,12 +5,11 @@ class Api::V1::LocationsController < Api::V1::BaseController
 
   def index
     if params[:start_date].present? && params[:end_date].present?
-      @locations = current_user.locations.between_times(Time.parse(params[:start_date]),
-                                                        Time.parse(params[:end_date]))
-    elsif params[:start_date].present?
-      @location = current_user.locations.after(Time.parse(params[:start_date]))
-    elsif params[:end_date].present?
-      @locations = current_user.locations.before(Time.parse(params[:end_date]))
+      @locations = current_user.locations.between_times(params[:start_date], params[:end_date])
+    elsif params[:start_date].present? && !params[:end_date].present?
+      @locations = current_user.locations.after(params[:start_date])
+    elsif params[:end_date].present? && !params[:start_date].present?
+      @locations = current_user.locations.before(params[:end_date])
     else
       @locations = current_user.locations.all
     end
