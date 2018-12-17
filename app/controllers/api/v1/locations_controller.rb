@@ -4,7 +4,19 @@ class Api::V1::LocationsController < Api::V1::BaseController
   before_action :set_location, only: %i[show destroy]
 
   def index
-    @locations = current_user.locations.all
+    if params[:start_date].present? && params[:end_date].present?
+      @locations = current_user.locations.where("created_at >= :start_date AND created_at <= :end_date",
+                  {start_date: params[:start_date], end_date: params[:end_date]})
+    elsif params[:start_date].present?
+      @location = current_user.locations.where("created_at >= :start_date",
+                  {start_date: params[:start_date]})
+    elsif params[:end_date].present?
+      @locations = current_user.locations.where("created_at <= :end_date",
+                  { end_date: params[:end_date]})
+    else
+      @locations = current_user.locations.all
+    end
+
     render json: @locations
   end
 
