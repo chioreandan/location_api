@@ -4,15 +4,16 @@ class Api::V1::LocationsController < Api::V1::BaseController
   before_action :set_location, only: %i[show destroy]
 
   def index
-    if params[:start_date].present? && params[:end_date].present?
-      @locations = current_user.locations.between_times(params[:start_date], params[:end_date])
-    elsif params[:start_date].present? && !params[:end_date].present?
-      @locations = current_user.locations.after(params[:start_date])
-    elsif params[:end_date].present? && !params[:start_date].present?
-      @locations = current_user.locations.before(params[:end_date])
-    else
-      @locations = current_user.locations.all
-    end
+    # if params[:start_date].present? && params[:end_date].present?
+    #   @locations = current_user.locations.between_times(params[:start_date], params[:end_date])
+    # elsif params[:start_date].present? && !params[:end_date].present?
+    #   @locations = current_user.locations.after(params[:start_date])
+    # elsif params[:end_date].present? && !params[:start_date].present?
+    #   @locations = current_user.locations.before(params[:end_date])
+    # else
+    #   @locations = Locations.all
+    # end
+    @locations = Location.all
 
     render json: @locations
   end
